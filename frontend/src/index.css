@@ -1,0 +1,286 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap');
+
+/* ============================================
+   FloatChat Design System — Ocean Intelligence
+   ============================================ */
+
+@layer base {
+  :root {
+    /* Core ocean palette */
+    --navy-deep: 211 73% 13%;        /* #0B1F3A */
+    --navy-ocean: 212 66% 17%;       /* #0E2A47 */
+    --teal-accent: 180 87% 35%;      /* #0EA5A4 */
+    --aqua-bg: 189 80% 96%;          /* #F2FBFD */
+    --white: 0 0% 100%;
+    --gray-muted: 220 9% 46%;        /* #6B7280 */
+    --gray-soft: 220 14% 96%;        /* near white */
+
+    /* Shadcn semantic tokens mapped */
+    --background: 0 0% 100%;
+    --foreground: 211 73% 13%;
+
+    --card: 0 0% 100%;
+    --card-foreground: 211 73% 13%;
+
+    --popover: 0 0% 100%;
+    --popover-foreground: 211 73% 13%;
+
+    --primary: 180 87% 35%;
+    --primary-foreground: 0 0% 100%;
+
+    --secondary: 189 80% 96%;
+    --secondary-foreground: 211 73% 13%;
+
+    --muted: 220 14% 96%;
+    --muted-foreground: 220 9% 46%;
+
+    --accent: 180 87% 35%;
+    --accent-foreground: 0 0% 100%;
+
+    --destructive: 0 84% 60%;
+    --destructive-foreground: 0 0% 100%;
+
+    --border: 214 32% 91%;
+    --input: 214 32% 91%;
+    --ring: 180 87% 35%;
+
+    --radius: 0.75rem;
+
+    /* Sidebar vars */
+    --sidebar-background: 0 0% 98%;
+    --sidebar-foreground: 240 5% 26%;
+    --sidebar-primary: 240 6% 10%;
+    --sidebar-primary-foreground: 0 0% 98%;
+    --sidebar-accent: 240 5% 96%;
+    --sidebar-accent-foreground: 240 6% 10%;
+    --sidebar-border: 220 13% 91%;
+    --sidebar-ring: 217 91% 60%;
+
+    /* Custom gradient vars */
+    --gradient-hero: linear-gradient(135deg, hsl(211 73% 13%) 0%, hsl(212 66% 17%) 100%);
+    --gradient-teal: linear-gradient(135deg, hsl(180 87% 35%) 0%, hsl(189 70% 50%) 100%);
+    --gradient-section: linear-gradient(180deg, hsl(189 80% 96%) 0%, hsl(0 0% 100%) 100%);
+    --shadow-card: 0 4px 24px -4px hsl(211 73% 13% / 0.08);
+    --shadow-card-hover: 0 16px 40px -8px hsl(211 73% 13% / 0.14);
+    --shadow-teal: 0 8px 32px -8px hsl(180 87% 35% / 0.4);
+  }
+
+  .dark {
+    --background: 211 73% 13%;
+    --foreground: 189 80% 96%;
+    --card: 212 66% 17%;
+    --card-foreground: 189 80% 96%;
+    --popover: 212 66% 17%;
+    --popover-foreground: 189 80% 96%;
+    --primary: 180 87% 35%;
+    --primary-foreground: 0 0% 100%;
+    --secondary: 212 66% 22%;
+    --secondary-foreground: 189 80% 96%;
+    --muted: 212 66% 22%;
+    --muted-foreground: 220 9% 65%;
+    --accent: 180 87% 35%;
+    --accent-foreground: 0 0% 100%;
+    --destructive: 0 63% 31%;
+    --destructive-foreground: 189 80% 96%;
+    --border: 212 66% 22%;
+    --input: 212 66% 22%;
+    --ring: 180 87% 35%;
+    --sidebar-background: 211 73% 10%;
+    --sidebar-foreground: 189 80% 96%;
+    --sidebar-primary: 180 87% 35%;
+    --sidebar-primary-foreground: 0 0% 100%;
+    --sidebar-accent: 212 66% 17%;
+    --sidebar-accent-foreground: 189 80% 96%;
+    --sidebar-border: 212 66% 22%;
+    --sidebar-ring: 180 87% 35%;
+  }
+}
+
+@layer base {
+  * {
+    @apply border-border;
+  }
+
+  html {
+    scroll-behavior: smooth;
+    font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+  }
+
+  body {
+    @apply bg-background text-foreground;
+    font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+  }
+
+  h1, h2, h3, h4, h5, h6 {
+    letter-spacing: -0.02em;
+    line-height: 1.2;
+  }
+
+  p {
+    line-height: 1.6;
+  }
+}
+
+@layer utilities {
+  /* Ocean grid background for hero */
+  .ocean-grid {
+    background-image:
+      linear-gradient(hsl(180 87% 35% / 0.06) 1px, transparent 1px),
+      linear-gradient(90deg, hsl(180 87% 35% / 0.06) 1px, transparent 1px);
+    background-size: 48px 48px;
+  }
+
+  /* Dot pattern */
+  .dot-pattern {
+    background-image: radial-gradient(hsl(180 87% 35% / 0.15) 1.5px, transparent 1.5px);
+    background-size: 28px 28px;
+  }
+
+  /* Glassmorphism */
+  .glass {
+    background: hsl(0 0% 100% / 0.08);
+    backdrop-filter: blur(16px);
+    -webkit-backdrop-filter: blur(16px);
+    border: 1px solid hsl(0 0% 100% / 0.12);
+  }
+
+  .glass-light {
+    background: hsl(0 0% 100% / 0.7);
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
+    border: 1px solid hsl(0 0% 100% / 0.4);
+  }
+
+  /* Gradient text */
+  .text-gradient {
+    background: var(--gradient-teal);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+  }
+
+  /* Nav underline animation */
+  .nav-link {
+    position: relative;
+  }
+
+  .nav-link::after {
+    content: '';
+    position: absolute;
+    bottom: -2px;
+    left: 50%;
+    right: 50%;
+    height: 2px;
+    background: hsl(var(--primary));
+    transition: left 0.25s ease, right 0.25s ease;
+  }
+
+  .nav-link:hover::after {
+    left: 0;
+    right: 0;
+  }
+
+  /* Feature card hover */
+  .feature-card {
+    transition: transform 0.3s cubic-bezier(0.34, 1.56, 0.64, 1), box-shadow 0.3s ease;
+  }
+
+  .feature-card:hover {
+    transform: translateY(-6px);
+    box-shadow: var(--shadow-card-hover);
+  }
+
+  /* Teal glow button */
+  .btn-teal-glow:hover {
+    box-shadow: var(--shadow-teal);
+  }
+
+  /* Animated gradient shift */
+  .hero-gradient {
+    background: var(--gradient-hero);
+    position: relative;
+  }
+
+  /* Section fade-in */
+  .section-fade {
+    opacity: 0;
+    transform: translateY(24px);
+    transition: opacity 0.7s ease, transform 0.7s ease;
+  }
+
+  .section-fade.visible {
+    opacity: 1;
+    transform: translateY(0);
+  }
+
+  /* Step number */
+  .step-number {
+    font-variant-numeric: tabular-nums;
+    font-feature-settings: 'tnum';
+  }
+}
+
+/* Keyframes */
+@keyframes float-up {
+  0%, 100% { transform: translateY(0px); }
+  50% { transform: translateY(-12px); }
+}
+
+@keyframes pulse-teal {
+  0%, 100% { opacity: 0.6; transform: scale(1); }
+  50% { opacity: 1; transform: scale(1.05); }
+}
+
+@keyframes wave-shift {
+  0% { background-position: 0% 50%; }
+  50% { background-position: 100% 50%; }
+  100% { background-position: 0% 50%; }
+}
+
+@keyframes counter-up {
+  from { opacity: 0; transform: translateY(16px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+@keyframes dot-pulse {
+  0%, 100% { opacity: 0.3; }
+  50% { opacity: 1; }
+}
+
+.animate-float {
+  animation: float-up 4s ease-in-out infinite;
+}
+
+.animate-pulse-teal {
+  animation: pulse-teal 3s ease-in-out infinite;
+}
+
+.animate-dot {
+  animation: dot-pulse 2s ease-in-out infinite;
+}
+
+/* Ripple for buttons */
+.ripple-btn {
+  position: relative;
+  overflow: hidden;
+}
+
+.ripple-btn::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: hsl(0 0% 100% / 0.1);
+  transform: scale(0);
+  border-radius: inherit;
+  transition: transform 0.4s ease;
+}
+
+.ripple-btn:active::before {
+  transform: scale(1);
+}
