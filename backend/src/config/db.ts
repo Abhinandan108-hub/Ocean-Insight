@@ -1,11 +1,8 @@
 import mongoose from 'mongoose';
 
 const connectDB = async (): Promise<void> => {
-  const uri = process.env.MONGO_URI;
-  if (!uri) {
-    console.warn('MONGO_URI not defined; skipping MongoDB connection');
-    return;
-  }
+  // Fallback to a sensible local default for development
+  const uri = process.env.MONGO_URI || 'mongodb://127.0.0.1:27017/ocean_insight';
 
   try {
     await mongoose.connect(uri);

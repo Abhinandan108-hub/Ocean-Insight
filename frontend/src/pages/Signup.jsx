@@ -1,8 +1,9 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import { motion, AnimatePresence } from "framer-motion";
 import { Waves, Eye, EyeOff, ArrowRight, Mail, Lock, User, Check } from "lucide-react";
 import ParticleBackground from "@/components/floatchat/ParticleBackground";
+import { useAuth } from "@/contexts/AuthContext";
 
 const passwordStrength = (pw) => {
   if (pw.length === 0) return 0;
@@ -19,6 +20,8 @@ const strengthColor = ["", "hsl(0,80%,60%)", "hsl(40,90%,55%)", "hsl(180,70%,45%
 
 export default function Signup() {
   const navigate = useNavigate();
+  const { register, isAuthenticated, isLoading: authLoading, error: authError } = useAuth();
+  
   const [form, setForm] = useState({ name: "", email: "", password: "", confirm: "" });
   const [showPass, setShowPass] = useState(false);
   const [loading, setLoading] = useState(false);
@@ -26,18 +29,53 @@ export default function Signup() {
   const [focused, setFocused] = useState("");
   const strength = passwordStrength(form.password);
 
+  // Redirect to dashboard if already authenticated
+  useEffect(() => {
+    if (isAuthenticated) {
+      navigate("/dashboard");
+    }
+  }, [isAuthenticated, navigate]);
+
   const set = (k) => (e) => setForm((f) => ({ ...f, [k]: e.target.value }));
 
   const handleSubmit = async (e) => {
     e.preventDefault();
     setError("");
-    if (!form.name || !form.email || !form.password) { setError("Please fill in all fields."); return; }
-    if (form.password !== form.confirm) { setError("Passwords do not match."); return; }
-    if (strength < 2) { setError("Please choose a stronger password."); return; }
-    setLoading(true);
-    await new Promise((r) => setTimeout(r, 1400));
-    setLoading(false);
-    navigate("/dashboard");
+
+    if (!form.name || !form.email || !form.password) {
+      setError("Please fill in all fields.");
+      return;
+    }
+
+    if (form.password !== form.confirm) {
+      setError("Passwords do not match.");
+      return;
+    }
+
+    // Match backend password rules: at least 8 chars, 1 uppercase, 1 number, 1 special (!@#$%^&*)
+    const isStrongPassword =
+      form.password.length >= 8 &&
+      /[A-Z]/.test(form.password) &&
+      /[0-9]/.test(form.password) &&
+      /[!@#$%^&*]/.test(form.password);
+
+    if (!isStrongPassword) {
+      setError(
+        "Password must be at least 8 characters and include an uppercase letter, a number, and a special character (!@#$%^&*)."
+      );
+      return;
+    }
+
+    try {
+      setLoading(true);
+      await register(form.name, form.email, form.password, form.confirm);
+      navigate("/dashboard");
+    } catch (err) {
+      // Error is already set in context, use that
+      setError(authError || "Registration failed. Please try again.");
+    } finally {
+      setLoading(false);
+    }
   };
 
   const fields = [

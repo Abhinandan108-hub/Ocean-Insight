@@ -1,11 +1,14 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import { motion, AnimatePresence } from "framer-motion";
 import { Waves, Eye, EyeOff, ArrowRight, Mail, Lock } from "lucide-react";
 import ParticleBackground from "@/components/floatchat/ParticleBackground";
+import { useAuth } from "@/contexts/AuthContext";
 
 export default function Login() {
   const navigate = useNavigate();
+  const { login, isAuthenticated, isLoading: authLoading, error: authError } = useAuth();
+  
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [showPass, setShowPass] = useState(false);
@@ -13,15 +16,32 @@ export default function Login() {
   const [error, setError] = useState("");
   const [focused, setFocused] = useState("");
 
+  // Redirect to dashboard if already authenticated
+  useEffect(() => {
+    if (isAuthenticated) {
+      navigate("/dashboard");
+    }
+  }, [isAuthenticated, navigate]);
+
   const handleSubmit = async (e) => {
     e.preventDefault();
     setError("");
-    if (!email || !password) { setError("Please fill in all fields."); return; }
-    setLoading(true);
-    // Simulate auth delay
-    await new Promise((r) => setTimeout(r, 1200));
-    setLoading(false);
-    navigate("/dashboard");
+    
+    if (!email || !password) {
+      setError("Please fill in all fields.");
+      return;
+    }
+    
+    try {
+      setLoading(true);
+      await login(email, password);
+      navigate("/dashboard");
+    } catch (err) {
+      // Error is already set in context, use that
+      setError(authError || "Login failed. Please try again.");
+    } finally {
+      setLoading(false);
+    }
   };
 
   return (
@@ -160,10 +180,22 @@ export default function Login() {
 
           {/* Demo login */}
           <motion.button
+            type="button"
             whileHover={{ scale: 1.02 }}
             whileTap={{ scale: 0.98 }}
-            onClick={() => navigate("/dashboard")}
-            className="w-full py-3 rounded-xl border border-white/15 text-white/70 hover:text-white hover:border-teal/40 text-sm font-medium transition-all duration-200 cursor-pointer"
+            onClick={async () => {
+              try {
+                setLoading(true);
+                await login("demo@oceaninsight.com", "DemoPass123!");
+                navigate("/dashboard");
+              } catch (err) {
+                setError("Demo login unavailable. Please use test credentials.");
+              } finally {
+                setLoading(false);
+              }
+            }}
+            disabled={loading}
+            className="w-full py-3 rounded-xl border border-white/15 text-white/70 hover:text-white hover:border-teal/40 text-sm font-medium transition-all duration-200 cursor-pointer disabled:opacity-50"
           >
             Continue as Demo User
           </motion.button>

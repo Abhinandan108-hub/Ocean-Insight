@@ -1,11 +1,12 @@
 import { useState } from "react";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { motion } from "framer-motion";
 import {
   Waves, LayoutDashboard, Map, MessageSquare, Settings,
   Bell, TrendingUp, Activity, Globe, Database, LogOut, ChevronRight, Wifi
 } from "lucide-react";
 import ParticleBackground from "@/components/floatchat/ParticleBackground";
+import { useAuth } from "@/contexts/AuthContext";
 
 const sideNav = [
   { icon: LayoutDashboard, label: "Overview", active: true },
@@ -26,12 +27,26 @@ const recentQueries = [
 const chartBars = [42, 67, 55, 80, 63, 74, 58, 88, 71, 95, 82, 76];
 
 export default function Dashboard() {
+  const navigate = useNavigate();
+  const { user, logout } = useAuth();
   const [activeNav, setActiveNav] = useState("Overview");
   const [chatInput, setChatInput] = useState("");
   const [chatMessages, setChatMessages] = useState([
     { role: "ai", text: "Hello! I'm FloatChat AI. Ask me anything about ocean data." }
   ]);
   const [typing, setTyping] = useState(false);
+
+  // Get user initials for avatar
+  const userInitials = user?.name
+    ?.split(" ")
+    .map((n) => n[0])
+    .join("")
+    .toUpperCase() || "U";
+
+  const handleLogout = () => {
+    logout();
+    navigate("/login");
+  };
 
   const sendMessage = async () => {
     if (!chatInput.trim()) return;
@@ -100,15 +115,20 @@ export default function Dashboard() {
         {/* User */}
         <div className="px-4 py-4 border-t border-white/8">
           <div className="flex items-center gap-3 mb-3">
-            <div className="w-8 h-8 rounded-full bg-gradient-teal flex items-center justify-center text-white text-xs font-bold">DR</div>
+            <div className="w-8 h-8 rounded-full bg-gradient-teal flex items-center justify-center text-white text-xs font-bold">
+              {userInitials}
+            </div>
             <div className="flex-1 min-w-0">
-              <p className="text-xs font-semibold text-white truncate">Dr. Researcher</p>
-              <p className="text-[10px] text-white/40 truncate">demo@floatchat.ai</p>
+              <p className="text-xs font-semibold text-white truncate">{user?.name || "User"}</p>
+              <p className="text-[10px] text-white/40 truncate">{user?.email || "user@example.com"}</p>
             </div>
           </div>
-          <Link to="/" className="flex items-center gap-2 text-xs text-white/40 hover:text-white transition-colors cursor-pointer">
+          <button
+            onClick={handleLogout}
+            className="flex items-center gap-2 text-xs text-white/40 hover:text-white transition-colors cursor-pointer"
+          >
             <LogOut className="w-3.5 h-3.5" /> Sign out
-          </Link>
+          </button>
         </div>
       </motion.aside>
 
