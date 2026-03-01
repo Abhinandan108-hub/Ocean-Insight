@@ -1,5 +1,5 @@
 import { useState, useEffect } from "react";
-import { Menu, X, Waves } from "lucide-react";
+import { Menu, X, Waves, ChevronDown } from "lucide-react";
 import { motion, AnimatePresence } from "framer-motion";
 import { Link } from "react-router-dom";
 
@@ -8,6 +8,7 @@ const navLinks = [
   { label: "Features", href: "#features" },
   { label: "Data", href: "#data" },
   { label: "How It Works", href: "#how-it-works" },
+  { label: "BGC-Argo", href: "#bgc-argo" },
   { label: "AI Chat", href: "#ai-chat" },
   { label: "Testimonials", href: "#testimonials" },
   { label: "Metrics", href: "#metrics" },
@@ -54,7 +55,7 @@ export default function Navbar() {
         </a>
 
         {/* Desktop Nav */}
-        <div className="hidden md:flex items-center gap-8">
+        <div className="hidden lg:flex items-center gap-6">
           {navLinks.map((link) => (
             <a
               key={link.label}
@@ -90,7 +91,7 @@ export default function Navbar() {
             <motion.span
               whileHover={{ scale: 1.04, boxShadow: "0 8px 32px -8px hsl(180 87% 35% / 0.6)" }}
               whileTap={{ scale: 0.97 }}
-              className="relative overflow-hidden text-sm font-semibold px-5 py-2 rounded-lg bg-gradient-teal text-primary-foreground cursor-pointer block"
+              className="relative overflow-hidden text-sm font-semibold px-5 py-2 rounded-lg bg-gradient-teal text-primary-foreground cursor-pointer block shadow-glow-teal"
             >
               <span className="relative z-10">Get Started</span>
               <motion.span
@@ -157,7 +158,7 @@ export default function Navbar() {
                   Login
                 </Link>
                 <Link to="/signup" onClick={() => setMenuOpen(false)}
-                  className="text-center text-sm font-semibold px-4 py-2.5 rounded-lg bg-gradient-teal text-primary-foreground cursor-pointer">
+                  className="text-center text-sm font-semibold px-4 py-2.5 rounded-lg bg-gradient-teal text-primary-foreground cursor-pointer shadow-glow-teal">
                   Get Started
                 </Link>
               </div>

@@ -28,11 +28,10 @@ export default function CTA() {
           transition={{ duration: 0.8, ease: [0.22, 1, 0.36, 1] }}
           className="max-w-2xl mx-auto"
         >
-          {/* Animated icon */}
           <motion.div
             animate={{ y: [0, -8, 0] }}
             transition={{ duration: 3, repeat: Infinity, ease: "easeInOut" }}
-            className="inline-flex w-16 h-16 rounded-2xl bg-gradient-teal items-center justify-center mb-8 shadow-teal-lg mx-auto"
+            className="inline-flex w-16 h-16 rounded-2xl bg-gradient-teal items-center justify-center mb-8 shadow-glow-teal mx-auto"
           >
             <Waves className="w-8 h-8 text-white" strokeWidth={1.8} />
           </motion.div>
@@ -45,12 +44,11 @@ export default function CTA() {
             world's largest ocean dataset network.
           </p>
 
-          {/* Magnetic-style CTA button */}
           <Link to="/signup">
             <motion.span
-              whileHover={{ scale: 1.06, boxShadow: "0 24px 60px -12px hsl(180 87% 35% / 0.55)" }}
+              whileHover={{ scale: 1.06 }}
               whileTap={{ scale: 0.96 }}
-              className="inline-flex items-center gap-3 px-10 py-4 rounded-full bg-gradient-teal text-primary-foreground font-bold text-base shadow-xl cursor-pointer relative overflow-hidden group"
+              className="inline-flex items-center gap-3 px-10 py-4 rounded-full bg-gradient-teal text-primary-foreground font-bold text-base shadow-glow-teal cursor-pointer relative overflow-hidden group"
             >
               <span className="relative z-10 flex items-center gap-3">
                 Start for Free
@@ -58,7 +56,6 @@ export default function CTA() {
                   <ArrowRight className="w-5 h-5" />
                 </motion.span>
               </span>
-              {/* Ripple */}
               <motion.span
                 className="absolute inset-0 bg-white/15 rounded-full"
                 initial={{ scale: 0, opacity: 0 }}

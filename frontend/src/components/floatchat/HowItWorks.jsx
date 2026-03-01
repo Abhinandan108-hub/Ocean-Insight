@@ -49,7 +49,6 @@ function Step({ step, index }) {
           transition={{ type: "spring", stiffness: 300 }}
           className="w-12 h-12 rounded-xl bg-card border border-ocean-border flex items-center justify-center shadow-card group-hover:border-primary group-hover:shadow-teal transition-all duration-300 relative overflow-hidden"
         >
-          {/* Shimmer */}
           <motion.div
             className="absolute inset-0"
             style={{
@@ -109,16 +108,27 @@ export default function HowItWorks() {
           </p>
         </motion.div>
 
-        {/* Steps */}
+        {/* Steps with SVG line animation */}
         <div className="relative">
-          {/* Animated vertical connector */}
+          {/* Animated SVG connector line */}
           <div className="absolute left-[22px] top-8 bottom-8 w-px hidden lg:block overflow-hidden">
-            <motion.div
-              className="w-full bg-gradient-to-b from-teal/40 via-teal/20 to-transparent"
-              initial={{ height: 0 }}
-              animate={headerInView ? { height: "100%" } : {}}
-              transition={{ duration: 1.2, delay: 0.3, ease: "easeOut" }}
-            />
+            <motion.svg
+              width="2"
+              height="100%"
+              className="absolute inset-0"
+              viewBox="0 0 2 400"
+              preserveAspectRatio="none"
+            >
+              <motion.line
+                x1="1" y1="0" x2="1" y2="400"
+                stroke="hsl(180 87% 35%)"
+                strokeWidth="2"
+                strokeDasharray="8 4"
+                initial={{ pathLength: 0, opacity: 0 }}
+                animate={headerInView ? { pathLength: 1, opacity: 0.4 } : {}}
+                transition={{ duration: 1.5, delay: 0.3, ease: "easeOut" }}
+              />
+            </motion.svg>
           </div>
 
           <div className="flex flex-col gap-12">

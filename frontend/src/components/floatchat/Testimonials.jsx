@@ -59,8 +59,16 @@ const testimonials = [
   },
 ];
 
+/* Institutional logo badges with abbreviation styling */
 const institutions = [
-  "NOAA", "Scripps Oceanography", "JAMSTEC", "IFREMER", "NERC", "ESA", "CSIRO", "MBARI",
+  { name: "NOAA", full: "National Oceanic and Atmospheric Administration" },
+  { name: "NASA", full: "National Aeronautics and Space Administration" },
+  { name: "Scripps", full: "Scripps Institution of Oceanography" },
+  { name: "JAMSTEC", full: "Japan Agency for Marine-Earth Science" },
+  { name: "IFREMER", full: "French Research Institute for Exploitation of the Sea" },
+  { name: "ESA", full: "European Space Agency" },
+  { name: "CSIRO", full: "Commonwealth Scientific and Industrial Research" },
+  { name: "MBARI", full: "Monterey Bay Aquarium Research Institute" },
 ];
 
 export default function Testimonials() {
@@ -119,7 +127,6 @@ export default function Testimonials() {
               whileHover={{ y: -6, boxShadow: "0 20px 48px -12px hsl(211 73% 13% / 0.12)" }}
               className="bg-card rounded-2xl p-7 border border-ocean-border shadow-card relative overflow-hidden group"
             >
-              {/* Quote icon */}
               <Quote className="w-8 h-8 text-primary/10 absolute top-5 right-5" />
 
               {/* Shimmer top */}
@@ -160,7 +167,7 @@ export default function Testimonials() {
           ))}
         </div>
 
-        {/* Institution logos strip */}
+        {/* Institution logos strip — styled as logo-like badges */}
         <motion.div
           initial={{ opacity: 0, y: 24 }}
           animate={inView ? { opacity: 1, y: 0 } : {}}
@@ -169,17 +176,23 @@ export default function Testimonials() {
           <p className="text-center text-xs text-muted-foreground font-medium uppercase tracking-widest mb-6">
             Used by researchers at
           </p>
-          <div className="flex flex-wrap justify-center gap-3">
+          <div className="flex flex-wrap justify-center gap-4">
             {institutions.map((inst, i) => (
               <motion.div
-                key={inst}
+                key={inst.name}
                 initial={{ opacity: 0, scale: 0.85 }}
                 animate={inView ? { opacity: 1, scale: 1 } : {}}
                 transition={{ delay: 0.7 + i * 0.05 }}
-                whileHover={{ scale: 1.06, borderColor: "hsl(var(--primary))" }}
-                className="px-5 py-2.5 rounded-full border border-ocean-border bg-card text-sm font-semibold text-muted-foreground hover:text-primary transition-colors duration-200 cursor-default"
+                whileHover={{ scale: 1.08, borderColor: "hsl(var(--primary))" }}
+                className="group relative px-6 py-3 rounded-xl border border-ocean-border bg-card hover:bg-primary/5 transition-all duration-200 cursor-default"
               >
-                {inst}
+                <span className="text-lg font-black tracking-wider text-foreground/70 group-hover:text-primary transition-colors">
+                  {inst.name}
+                </span>
+                {/* Tooltip on hover */}
+                <span className="absolute -bottom-8 left-1/2 -translate-x-1/2 whitespace-nowrap text-[9px] text-muted-foreground opacity-0 group-hover:opacity-100 transition-opacity pointer-events-none">
+                  {inst.full}
+                </span>
               </motion.div>
             ))}
           </div>
