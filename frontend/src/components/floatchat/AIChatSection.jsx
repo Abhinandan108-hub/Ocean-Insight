@@ -1,28 +1,31 @@
 import { useState, useRef, useEffect } from "react";
 import { motion, useInView, AnimatePresence } from "framer-motion";
-import { Waves, Send, Sparkles, RotateCcw } from "lucide-react";
+import { Waves, Send, Sparkles, RotateCcw, BarChart2 } from "lucide-react";
 
 const DEMO_EXCHANGES = [
   {
-    question: "Show me Pacific Ocean temperature anomalies for 2023",
-    answer: "I analyzed 4,231 ARGO floats in the Pacific basin for 2023. Key findings:\n\n• Average surface temperature anomaly: **+0.84°C** above 1990–2020 baseline\n• Strongest warming: North Pacific (35°N–45°N), anomaly up to **+1.6°C**\n• La Niña signature detected in equatorial region through Q1\n• 847 floats recorded temperatures exceeding historical max at depth >500m\n\nShall I generate a trajectory map or depth profile breakdown?",
+    question: "Compare Pacific vs Indian Ocean",
+    answer: "Comparison complete across 2,847 matched float pairs:\n\n• **Atlantic avg salinity**: 35.2 PSU (surface), 34.8 PSU (1000m)\n• **Indian Ocean avg salinity**: 35.6 PSU (surface), 34.9 PSU (1000m)\n• Indian Ocean shows higher evaporation-driven salinity above thermocline\n• Atlantic exhibits stronger halocline gradient between 200–600m",
+    chart: [45, 62, 78, 55, 82, 91, 67, 73, 85, 60],
   },
   {
-    question: "Compare salinity profiles between Atlantic and Indian Ocean",
-    answer: "Comparison complete across 2,847 matched float pairs:\n\n• **Atlantic avg salinity**: 35.2 PSU (surface), 34.8 PSU (1000m)\n• **Indian Ocean avg salinity**: 35.6 PSU (surface), 34.9 PSU (1000m)\n• Indian Ocean shows higher evaporation-driven salinity above thermocline\n• Atlantic exhibits stronger halocline gradient between 200–600m\n• Anomaly detected: 12 Atlantic floats showing freshening trend (−0.3 PSU) near Greenland",
+    question: "Find 2024 Temperature Anomalies",
+    answer: "I analyzed 4,231 ARGO floats for 2024. Key findings:\n\n• Average surface temperature anomaly: **+0.84°C** above 1990–2020 baseline\n• Strongest warming: North Pacific (35°N–45°N), anomaly up to **+1.6°C**\n• La Niña signature detected in equatorial region through Q1\n• 847 floats recorded temperatures exceeding historical max",
+    chart: [30, 42, 58, 75, 88, 92, 86, 79, 95, 88],
   },
   {
-    question: "Detect oxygen minimum zones below 800m globally",
-    answer: "OMZ detection complete — scanning 9,841 dissolved oxygen profiles:\n\n• **4 primary OMZ zones identified** globally\n• Eastern Tropical Pacific: O₂ < 20 μmol/kg between 300–900m\n• Arabian Sea: Most intense OMZ, O₂ < 5 μmol/kg at 400–1200m\n• Bay of Bengal: Expanding OMZ, volume up **8.4%** since 2015\n• Benguela Upwelling: Seasonal OMZ intensification detected in Q2–Q3\n\nWant me to overlay float trajectories on the OMZ boundaries?",
+    question: "Show me Float #5904671",
+    answer: "Float WMO 5904671 — Active since 2019:\n\n• **Current Position**: 32.4°N, 64.2°W (North Atlantic)\n• **Last Cycle**: #247, surfaced 2h ago\n• **Depth Range**: 0–2000m, 78 levels\n• **QC Status**: All parameters passed\n• **Sensors**: CTD + Dissolved O₂ + pH\n\nTrajectory shows 340km drift over last 30 cycles.",
+    chart: [20, 35, 50, 65, 72, 68, 55, 48, 42, 38],
   },
 ];
 
-const QUICK_QUERIES = [
-  "Temperature anomalies 2023",
-  "Float WMO 5904671 trajectory",
-  "Salinity Atlantic vs Indian",
-  "Oxygen minimum zones depth",
-  "ENSO signal detection",
+const QUICK_CHIPS = [
+  { label: "Compare Pacific vs Indian Ocean", icon: "🌊" },
+  { label: "Find 2024 Temperature Anomalies", icon: "🌡️" },
+  { label: "Show me Float #5904671", icon: "📍" },
+  { label: "Detect Oxygen Minimum Zones", icon: "💨" },
+  { label: "ENSO Signal Detection", icon: "⚡" },
 ];
 
 function TypingResponse({ text, onDone }) {
@@ -51,6 +54,35 @@ function TypingResponse({ text, onDone }) {
       )}
       <span className="inline-block w-0.5 h-4 bg-teal ml-0.5 animate-pulse align-middle" />
     </span>
+  );
+}
+
+/* Animated mini chart that appears after AI response */
+function MiniChart({ data, visible }) {
+  if (!visible || !data) return null;
+  return (
+    <motion.div
+      initial={{ opacity: 0, height: 0 }}
+      animate={{ opacity: 1, height: "auto" }}
+      transition={{ duration: 0.5 }}
+      className="mt-3 p-3 rounded-xl bg-white/5 border border-white/8"
+    >
+      <div className="flex items-center gap-1.5 mb-2">
+        <BarChart2 className="w-3 h-3 text-teal" />
+        <span className="text-[10px] text-white/40 font-semibold uppercase tracking-wider">Analysis Result</span>
+      </div>
+      <div className="flex items-end gap-1 h-12">
+        {data.map((h, i) => (
+          <motion.div
+            key={i}
+            className="flex-1 rounded-sm bg-gradient-to-t from-teal/60 to-teal"
+            initial={{ height: 0 }}
+            animate={{ height: `${h}%` }}
+            transition={{ duration: 0.4, delay: i * 0.05 }}
+          />
+        ))}
+      </div>
+    </motion.div>
   );
 }
 
@@ -83,10 +115,10 @@ export default function AIChatSection() {
     const match = DEMO_EXCHANGES.find((d) =>
       q.toLowerCase().includes(d.question.split(" ").slice(0, 3).join(" ").toLowerCase())
     );
-    const answer = match?.answer || DEMO_EXCHANGES[demoIdx % DEMO_EXCHANGES.length].answer;
+    const exchange = match || DEMO_EXCHANGES[demoIdx % DEMO_EXCHANGES.length];
     setDemoIdx((i) => i + 1);
 
-    setMessages((prev) => [...prev, { role: "ai", text: answer, typed: false }]);
+    setMessages((prev) => [...prev, { role: "ai", text: exchange.answer, typed: false, chart: exchange.chart }]);
     setLoading(false);
     scrollToBottom();
   };
@@ -99,7 +131,6 @@ export default function AIChatSection() {
 
   return (
     <section id="ai-chat" className="py-28 bg-gradient-metrics relative overflow-hidden" ref={sectionRef}>
-      {/* Background */}
       <div className="absolute inset-0 ocean-grid opacity-30 pointer-events-none" />
       <motion.div
         className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[700px] h-[700px] rounded-full bg-teal/5 blur-3xl pointer-events-none"
@@ -123,32 +154,32 @@ export default function AIChatSection() {
             Ask the ocean anything
           </h2>
           <p className="text-white/50 text-base max-w-lg mx-auto leading-relaxed">
-            Try our AI query engine — type any ocean science question and watch FloatChat analyze thousands of real ARGO float profiles instantly.
+            Try our AI query engine — click a quick action chip or type any ocean science question.
           </p>
         </motion.div>
 
         <div className="grid lg:grid-cols-5 gap-8 items-start max-w-6xl mx-auto">
-          {/* Quick query sidebar */}
+          {/* Quick Action Chips sidebar */}
           <motion.div
             initial={{ opacity: 0, x: -32 }}
             animate={inView ? { opacity: 1, x: 0 } : {}}
             transition={{ duration: 0.6, delay: 0.2 }}
             className="lg:col-span-2 flex flex-col gap-3"
           >
-            <p className="text-xs font-bold text-white/40 uppercase tracking-widest mb-1">Sample Queries</p>
-            {QUICK_QUERIES.map((q, i) => (
+            <p className="text-xs font-bold text-white/40 uppercase tracking-widest mb-1">Quick Actions</p>
+            {QUICK_CHIPS.map((q, i) => (
               <motion.button
-                key={q}
+                key={q.label}
                 initial={{ opacity: 0, x: -20 }}
                 animate={inView ? { opacity: 1, x: 0 } : {}}
                 transition={{ delay: 0.3 + i * 0.07 }}
-                whileHover={{ x: 6, backgroundColor: "hsl(180 87% 35% / 0.12)" }}
+                whileHover={{ x: 6, backgroundColor: "hsl(180 87% 35% / 0.12)", borderColor: "hsl(180 87% 35% / 0.4)" }}
                 whileTap={{ scale: 0.97 }}
-                onClick={() => sendMessage(q)}
-                className="text-left px-4 py-3 rounded-xl border border-white/10 bg-white/4 text-sm text-white/70 hover:text-white hover:border-teal/30 transition-all duration-200 cursor-pointer group"
+                onClick={() => sendMessage(q.label)}
+                className="text-left px-4 py-3 rounded-xl border border-white/10 bg-white/4 text-sm text-white/70 hover:text-white transition-all duration-200 cursor-pointer group flex items-center gap-3"
               >
-                <span className="text-teal mr-2 text-xs">→</span>
-                {q}
+                <span className="text-lg">{q.icon}</span>
+                <span>{q.label}</span>
               </motion.button>
             ))}
 
@@ -217,7 +248,6 @@ export default function AIChatSection() {
                     transition={{ duration: 0.35 }}
                     className={`flex gap-3 ${msg.role === "user" ? "flex-row-reverse" : "flex-row"}`}
                   >
-                    {/* Avatar */}
                     {msg.role === "ai" && (
                       <div className="w-7 h-7 rounded-lg bg-gradient-teal flex-shrink-0 flex items-center justify-center mt-0.5">
                         <Waves className="w-3.5 h-3.5 text-white" />
@@ -234,22 +264,27 @@ export default function AIChatSection() {
                         : "bg-white/6 border border-white/8"
                     }`}>
                       {msg.role === "ai" && !msg.typed ? (
-                        <TypingResponse text={msg.text} onDone={() => {
-                          setMessages((prev) => prev.map((m, idx) => idx === i ? { ...m, typed: true } : m));
-                        }} />
+                        <>
+                          <TypingResponse text={msg.text} onDone={() => {
+                            setMessages((prev) => prev.map((m, idx) => idx === i ? { ...m, typed: true } : m));
+                          }} />
+                          <MiniChart data={msg.chart} visible={msg.typed} />
+                        </>
                       ) : (
-                        <span className="text-sm text-white/80 leading-relaxed whitespace-pre-line">
-                          {msg.text.split(/(\*\*[^*]+\*\*)/).map((part, pi) =>
-                            part.startsWith("**") ? <strong key={pi} className="text-white font-semibold">{part.slice(2, -2)}</strong> : part
-                          )}
-                        </span>
+                        <>
+                          <span className="text-sm text-white/80 leading-relaxed whitespace-pre-line">
+                            {msg.text.split(/(\*\*[^*]+\*\*)/).map((part, pi) =>
+                              part.startsWith("**") ? <strong key={pi} className="text-white font-semibold">{part.slice(2, -2)}</strong> : part
+                            )}
+                          </span>
+                          {msg.role === "ai" && <MiniChart data={msg.chart} visible={!!msg.chart} />}
+                        </>
                       )}
                     </div>
                   </motion.div>
                 ))}
               </AnimatePresence>
 
-              {/* Loading dots */}
               {loading && (
                 <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }} className="flex gap-3">
                   <div className="w-7 h-7 rounded-lg bg-gradient-teal flex-shrink-0 flex items-center justify-center">
@@ -279,11 +314,11 @@ export default function AIChatSection() {
                   className="flex-1 bg-transparent text-white placeholder:text-white/25 text-sm outline-none px-2"
                 />
                 <motion.button
-                  whileHover={{ scale: 1.1, boxShadow: "0 8px 24px -4px hsl(180 87% 35% / 0.5)" }}
+                  whileHover={{ scale: 1.1 }}
                   whileTap={{ scale: 0.93 }}
                   onClick={() => sendMessage()}
                   disabled={loading || !input.trim()}
-                  className="w-9 h-9 rounded-xl bg-gradient-teal flex items-center justify-center cursor-pointer flex-shrink-0 disabled:opacity-40 transition-opacity"
+                  className="w-9 h-9 rounded-xl bg-gradient-teal flex items-center justify-center cursor-pointer flex-shrink-0 disabled:opacity-40 transition-opacity shadow-glow-teal"
                 >
                   <Send className="w-4 h-4 text-white" />
                 </motion.button>

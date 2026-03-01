@@ -70,6 +70,31 @@ export default function Footer() {
           ))}
         </div>
 
+        {/* System Status Bar */}
+        <div className="mb-8 p-4 rounded-xl border border-ocean-border bg-card">
+          <div className="flex flex-wrap items-center justify-between gap-4">
+            <p className="text-xs font-bold text-foreground uppercase tracking-widest">System Status</p>
+            <div className="flex flex-wrap items-center gap-6">
+              {[
+                { label: "API", status: "Operational", ok: true },
+                { label: "Data Network", status: "99.9% Up", ok: true },
+                { label: "AI Engine", status: "Operational", ok: true },
+                { label: "CDN", status: "Healthy", ok: true },
+              ].map((s) => (
+                <div key={s.label} className="flex items-center gap-2">
+                  <span className="relative flex h-2 w-2">
+                    {s.ok && <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-emerald-400 opacity-75" />}
+                    <span className={`relative inline-flex rounded-full h-2 w-2 ${s.ok ? "bg-emerald-400" : "bg-red-400"}`} />
+                  </span>
+                  <span className="text-xs text-muted-foreground">
+                    <span className="font-semibold text-foreground">{s.label}:</span> {s.status}
+                  </span>
+                </div>
+              ))}
+            </div>
+          </div>
+        </div>
+
         {/* Bottom bar */}
         <div className="border-t border-ocean-border pt-6 flex flex-col sm:flex-row items-center justify-between gap-3">
           <p className="text-xs text-muted-foreground">
