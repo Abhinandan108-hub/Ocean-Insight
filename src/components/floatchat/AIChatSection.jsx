@@ -221,7 +221,7 @@ export default function AIChatSection() {
                 <Waves className="w-4.5 h-4.5 text-white" />
               </div>
               <div className="flex-1">
-                <p className="text-sm font-bold text-white">FloatChat AI</p>
+                <p className="text-sm font-bold text-white">AquaWave AI</p>
                 <div className="flex items-center gap-1.5">
                   <motion.div className="w-1.5 h-1.5 rounded-full bg-teal" animate={{ opacity: [1, 0.3, 1] }} transition={{ duration: 1.5, repeat: Infinity }} />
                   <span className="text-xs text-white/40">Ocean Intelligence Engine · Active</span>

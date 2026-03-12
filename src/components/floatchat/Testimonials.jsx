@@ -92,7 +92,7 @@ export default function Testimonials() {
             Trusted by the world's ocean scientists
           </h2>
           <p className="text-muted-foreground text-base max-w-lg mx-auto leading-relaxed">
-            Researchers from top institutions use FloatChat to accelerate their ocean data science workflows.
+            Researchers from top institutions use AquaWave to accelerate their ocean data science workflows.
           </p>
         </motion.div>
 
