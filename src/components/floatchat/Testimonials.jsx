@@ -10,7 +10,7 @@ const testimonials = [
     avatar: "SC",
     color: "hsl(180, 87%, 35%)",
     stars: 5,
-    quote: "FloatChat has fundamentally changed how I interact with ARGO data. What used to take weeks of Python scripting now takes minutes. The AI accurately interprets complex oceanographic queries I never thought a language model could handle.",
+    quote: "AquaWave has fundamentally changed how I interact with ARGO data. What used to take weeks of Python scripting now takes minutes. The AI accurately interprets complex oceanographic queries I never thought a language model could handle.",
   },
   {
     name: "Prof. James Okafor",
