@@ -124,7 +124,7 @@ export default function AIChatSection() {
   };
 
   const reset = () => {
-    setMessages([{ role: "ai", text: "Hello! I'm FloatChat AI — trained on global ARGO ocean data. Ask me anything about ocean temperatures, salinity, float trajectories, or anomalies.", typed: true }]);
+    setMessages([{ role: "ai", text: "Hello! I'm AquaWave AI — trained on global ARGO ocean data. Ask me anything about ocean temperatures, salinity, float trajectories, or anomalies.", typed: true }]);
     setInput("");
     setDemoIdx(0);
   };
