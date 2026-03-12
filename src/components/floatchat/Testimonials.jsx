@@ -37,7 +37,7 @@ const testimonials = [
     avatar: "KW",
     color: "hsl(190, 85%, 38%)",
     stars: 5,
-    quote: "I tested FloatChat against our in-house MATLAB analysis pipeline on a complex El Niño detection query. FloatChat was 40x faster and produced comparable scientific accuracy. Absolutely transformative for our team.",
+    quote: "I tested AquaWave against our in-house MATLAB analysis pipeline on a complex El Niño detection query. AquaWave was 40x faster and produced comparable scientific accuracy. Absolutely transformative for our team.",
   },
   {
     name: "Dr. Lucia Martínez",
