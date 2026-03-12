@@ -86,7 +86,7 @@ export default function Dashboard() {
               <Waves className="w-4 h-4 text-white" strokeWidth={2.5} />
             </div>
             <span className="font-bold text-base text-white tracking-tight">
-              Float<span className="text-gradient">Chat</span>
+              Aqua<span className="text-gradient">Wave</span>
             </span>
           </Link>
         </div>

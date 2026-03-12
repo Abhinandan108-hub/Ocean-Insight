@@ -103,7 +103,7 @@ export default function ComparisonSlider() {
               </div>
             </div>
 
-            {/* RIGHT: FloatChat Visual */}
+            {/* RIGHT: AquaWave Visual */}
             <div className="absolute inset-0 bg-card p-6" style={{ clipPath: `inset(0 0 0 ${sliderPos}%)` }}>
               <div className="flex items-center justify-between mb-4">
                 <div className="flex items-center gap-2">
