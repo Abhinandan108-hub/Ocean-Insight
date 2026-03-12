@@ -5,7 +5,7 @@ const metrics = [
   { value: 10000, suffix: "+", label: "Floats Analyzed", desc: "Active ARGO profiling floats in our network" },
   { value: 1, suffix: "M+", label: "Data Points", desc: "Ocean measurements processed daily" },
   { value: 99.9, suffix: "%", label: "Uptime", desc: "Platform reliability SLA guarantee" },
-  { value: 50, suffix: "+", label: "Researchers", desc: "Scientific teams using FloatChat globally" },
+  { value: 50, suffix: "+", label: "Researchers", desc: "Scientific teams using AquaWave globally" },
 ];
 
 function useCountUp(target, decimals = 0, active) {
