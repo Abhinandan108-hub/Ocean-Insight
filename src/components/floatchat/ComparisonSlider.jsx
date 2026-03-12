@@ -66,7 +66,7 @@ export default function ComparisonSlider() {
             From raw NetCDF to visual insight
           </h2>
           <p className="text-muted-foreground text-base max-w-lg mx-auto leading-relaxed">
-            Slide to compare raw ocean data with FloatChat's AI-powered visualization. See how we transform complex datasets into actionable research insights.
+            Slide to compare raw ocean data with AquaWave's AI-powered visualization. See how we transform complex datasets into actionable research insights.
           </p>
         </motion.div>
 
