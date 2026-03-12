@@ -110,7 +110,7 @@ export default function ComparisonSlider() {
                   <div className="w-7 h-7 rounded-lg bg-gradient-teal flex items-center justify-center">
                     <span className="text-white text-xs font-bold">FC</span>
                   </div>
-                  <span className="text-sm font-bold text-foreground">FloatChat Visual Insight</span>
+                  <span className="text-sm font-bold text-foreground">AquaWave Visual Insight</span>
                 </div>
                 <span className="text-[10px] text-primary font-semibold px-2 py-1 rounded-full bg-primary/10">WMO: 5904671</span>
               </div>
