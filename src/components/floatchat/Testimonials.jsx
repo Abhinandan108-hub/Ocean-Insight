@@ -46,7 +46,7 @@ const testimonials = [
     avatar: "LM",
     color: "hsl(160, 70%, 38%)",
     stars: 5,
-    quote: "The anomaly detection and trend summarization features have accelerated our climate model validation by a full quarter. FloatChat understands the nuances of BGC-Argo sensors in ways that surprised even our senior scientists.",
+    quote: "The anomaly detection and trend summarization features have accelerated our climate model validation by a full quarter. AquaWave understands the nuances of BGC-Argo sensors in ways that surprised even our senior scientists.",
   },
   {
     name: "Prof. David Nduka",
