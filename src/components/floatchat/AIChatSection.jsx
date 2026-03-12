@@ -92,7 +92,7 @@ export default function AIChatSection() {
   const chatEndRef = useRef(null);
 
   const [messages, setMessages] = useState([
-    { role: "ai", text: "Hello! I'm FloatChat AI — trained on global ARGO ocean data. Ask me anything about ocean temperatures, salinity, float trajectories, or anomalies.", typed: true },
+    { role: "ai", text: "Hello! I'm AquaWave AI — trained on global ARGO ocean data. Ask me anything about ocean temperatures, salinity, float trajectories, or anomalies.", typed: true },
   ]);
   const [input, setInput] = useState("");
   const [loading, setLoading] = useState(false);
