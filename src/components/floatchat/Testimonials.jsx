@@ -28,7 +28,7 @@ const testimonials = [
     avatar: "AH",
     color: "hsl(170, 75%, 40%)",
     stars: 5,
-    quote: "Our lab switched from manual NetCDF workflows to FloatChat six months ago. Productivity has tripled. The AI chat interface makes ocean data accessible to my marine biology students who have no programming background.",
+    quote: "Our lab switched from manual NetCDF workflows to AquaWave six months ago. Productivity has tripled. The AI chat interface makes ocean data accessible to my marine biology students who have no programming background.",
   },
   {
     name: "Dr. Kenji Watanabe",
