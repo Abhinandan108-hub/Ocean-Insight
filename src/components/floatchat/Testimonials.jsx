@@ -19,7 +19,7 @@ const testimonials = [
     avatar: "JO",
     color: "hsl(200, 80%, 45%)",
     stars: 5,
-    quote: "The depth of ocean domain knowledge built into FloatChat is remarkable. It understands WMO float IDs, QC flags, pressure-depth conversions — things no general AI tool gets right. This is research-grade tooling.",
+    quote: "The depth of ocean domain knowledge built into AquaWave is remarkable. It understands WMO float IDs, QC flags, pressure-depth conversions — things no general AI tool gets right. This is research-grade tooling.",
   },
   {
     name: "Dr. Amira Hassan",
