@@ -158,7 +158,7 @@ export default function ComparisonSlider() {
               </div>
 
               <div className="absolute bottom-4 right-4 px-3 py-1.5 rounded-lg bg-primary/10 border border-primary/20">
-                <span className="text-xs text-primary font-semibold">FloatChat AI Output</span>
+                <span className="text-xs text-primary font-semibold">AquaWave AI Output</span>
               </div>
             </div>
 

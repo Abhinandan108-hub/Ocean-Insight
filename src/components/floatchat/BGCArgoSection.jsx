@@ -88,7 +88,7 @@ export default function BGCArgoSection() {
             Beyond temperature & salinity
           </h2>
           <p className="text-muted-foreground text-base max-w-xl mx-auto leading-relaxed">
-            FloatChat supports the full suite of BGC-Argo biogeochemical parameters.
+            AquaWave supports the full suite of BGC-Argo biogeochemical parameters.
             Research-grade chemical data, made conversational.
           </p>
         </motion.div>

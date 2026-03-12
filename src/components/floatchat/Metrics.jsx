@@ -101,7 +101,7 @@ export default function Metrics() {
             Trusted by the global ocean research community
           </h2>
           <p className="text-white/40 text-base max-w-md mx-auto leading-relaxed">
-            From small labs to international research consortia — FloatChat scales with your scientific ambition.
+            From small labs to international research consortia — AquaWave scales with your scientific ambition.
           </p>
         </motion.div>
 

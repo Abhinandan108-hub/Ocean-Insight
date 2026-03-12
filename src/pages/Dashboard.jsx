@@ -32,7 +32,7 @@ export default function Dashboard() {
   const [activeNav, setActiveNav] = useState("Overview");
   const [chatInput, setChatInput] = useState("");
   const [chatMessages, setChatMessages] = useState([
-    { role: "ai", text: "Hello! I'm FloatChat AI. Ask me anything about ocean data." }
+    { role: "ai", text: "Hello! I'm AquaWave AI. Ask me anything about ocean data." }
   ]);
   const [typing, setTyping] = useState(false);
 

@@ -47,7 +47,7 @@ export default function DataPreview() {
               Research-grade data, made visual and conversational
             </h2>
             <p className="text-muted-foreground text-base leading-relaxed mb-8 max-w-md">
-              FloatChat connects directly to the Global ARGO data network — parsing,
+              AquaWave connects directly to the Global ARGO data network — parsing,
               structuring, and presenting ocean measurements in an interface built for
               deep exploration.
             </p>

@@ -104,7 +104,7 @@ export default function HowItWorks() {
             From raw data to research insights in four steps
           </h2>
           <p className="text-muted-foreground text-base leading-relaxed">
-            FloatChat handles the complexity of ocean data science so you can focus on discovery.
+            AquaWave handles the complexity of ocean data science so you can focus on discovery.
           </p>
         </motion.div>
 
