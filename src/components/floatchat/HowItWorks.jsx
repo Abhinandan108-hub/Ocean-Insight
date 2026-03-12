@@ -7,7 +7,7 @@ const steps = [
     number: "01",
     icon: Database,
     title: "Upload or Select Dataset",
-    desc: "Connect to the global ARGO network or upload your own float data. FloatChat supports NetCDF, CSV, and direct API ingestion with automated schema detection.",
+    desc: "Connect to the global ARGO network or upload your own float data. AquaWave supports NetCDF, CSV, and direct API ingestion with automated schema detection.",
   },
   {
     number: "02",
