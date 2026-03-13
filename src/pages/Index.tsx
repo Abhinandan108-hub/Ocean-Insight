@@ -8,6 +8,7 @@ import BGCArgoSection from "@/components/floatchat/BGCArgoSection";
 import AIChatSection from "@/components/floatchat/AIChatSection";
 import Testimonials from "@/components/floatchat/Testimonials";
 import Metrics from "@/components/floatchat/Metrics";
+import Pricing from "@/components/floatchat/Pricing";
 import CTA from "@/components/floatchat/CTA";
 import Footer from "@/components/floatchat/Footer";
 import SpotlightCursor from "@/components/floatchat/SpotlightCursor";
@@ -31,6 +32,7 @@ const Index = () => {
       </section>
       <AIChatSection />
       <Testimonials />
+      <Pricing />
       <Metrics />
       <CTA />
       <Footer />
