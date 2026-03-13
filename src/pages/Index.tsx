@@ -32,6 +32,7 @@ const Index = () => {
       </section>
       <AIChatSection />
       <Testimonials />
+      <Pricing />
       <Metrics />
       <CTA />
       <Footer />

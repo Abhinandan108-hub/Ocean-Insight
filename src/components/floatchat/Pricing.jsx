@@ -64,7 +64,14 @@ const plans = [
 
 export default function Pricing() {
   const [annual, setAnnual] = useState(true);
-  const [ref, visible] = useScrollReveal(0.15);
+  const [visible, setVisible] = useState(false);
+  const ref = useRef(null);
+
+  useEffect(() => {
+    const obs = new IntersectionObserver(([e]) => { if (e.isIntersecting) setVisible(true); }, { threshold: 0.1 });
+    if (ref.current) obs.observe(ref.current);
+    return () => obs.disconnect();
+  }, []);
 
   return (
     <section id="pricing" ref={ref} className="py-20 sm:py-28 bg-background relative overflow-hidden">
