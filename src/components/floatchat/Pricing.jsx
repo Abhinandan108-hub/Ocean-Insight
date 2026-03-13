@@ -2,7 +2,7 @@ import { useState } from "react";
 import { motion } from "framer-motion";
 import { Check, Zap, Crown, Building2 } from "lucide-react";
 import { Link } from "react-router-dom";
-import { useScrollReveal } from "@/hooks/useScrollReveal";
+import { useEffect, useRef, useState } from "react";
 
 const plans = [
   {
